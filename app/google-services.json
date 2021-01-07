@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "388966483920",
+    "firebase_url": "https://esp32-ewalk.firebaseio.com",
+    "project_id": "esp32-ewalk",
+    "storage_bucket": "esp32-ewalk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388966483920:android:7f16517c2ae9f941a15bd5",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388966483920-4jhbhhgmnvvoffp5fnaap1756rn8i841.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZJ0F-Dygj93PMu7HPj7Lt2tTxBXSrldo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388966483920-4jhbhhgmnvvoffp5fnaap1756rn8i841.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
