@@ -10,6 +10,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -29,10 +30,16 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Family extends AppCompatActivity {
     TextView name,lati,longi;
+    TextView textLocation_lat,textLocation_long,sensor1,sensor2,sensor3,tempra,humidity;
     Button logout,location_view;
     FirebaseDatabase firebasedatabase;
     DatabaseReference myref;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
+    // Write a message to the database
+
+    DatabaseReference myref1 = database.getReference("Location");
+
+    DatabaseReference myref2 = database.getReference("weather");
 
     DatabaseReference myref3 = database.getReference("Sensors");
 
@@ -45,6 +52,9 @@ public class Family extends AppCompatActivity {
         name = findViewById(R.id.fname);
         lati = findViewById(R.id.lati);
         longi = findViewById(R.id.longi);
+        sensor1 = (TextView) findViewById(R.id.sensor1);
+        sensor2 = (TextView) findViewById(R.id.sensor2);
+        sensor3 = (TextView) findViewById(R.id.sensor3);
 
 //        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Location");
 //        databaseReference.addValueEventListener(new ValueEventListener() {
@@ -75,6 +85,36 @@ public class Family extends AppCompatActivity {
 //                Notification
 
                 int notifi = snapshot.child("noti").getValue(int.class);
+                int sens1 = snapshot.child("S1").getValue(int.class);
+                sensor1.setText("Sensor1 "+sens1);
+                int sens2 = snapshot.child("S2").getValue(int.class);
+                sensor2.setText("Sensor2 "+sens2);
+                int sens3 = snapshot.child("S3").getValue(int.class);
+                sensor3.setText("Sensor3 "+sens3);
+
+                if (sens1 <= 100 && sens2 > 100 && sens3 > 100){
+                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+
+                }else if (sens1 > 100 && sens2 <= 100 && sens3 > 100){
+                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+
+
+                }
+                else if (sens1 > 100 && sens2 > 100 && sens3 <= 100){
+                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+                }
+                else if (sens1 <= 100 && sens2 <= 100 && sens3 > 100){
+                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+                }
+                else if (sens1 <= 100 && sens2 > 100 && sens3 <= 100){
+                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+                }
+                else if (sens1 > 100 && sens2 <= 100 && sens3 <= 100){
+                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+                }
 
                 if (notifi == 1){
                     NotificationCompat.Builder mbuilder = new NotificationCompat.Builder(Family.this,"My Notification");
@@ -102,7 +142,7 @@ public class Family extends AppCompatActivity {
 
             }
         });
-        name.setText("Welcome "+getIntent().getStringExtra("name"));
+        name.setText("Welcome to dashboard "+getIntent().getStringExtra("name"));
         location_view = (Button) findViewById(R.id.location_view);
         location_view.setOnClickListener(new View.OnClickListener() {
             @Override

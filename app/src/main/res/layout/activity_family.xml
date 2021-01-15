@@ -146,7 +146,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
+        android:layout_weight="0.4"
         android:background="@drawable/card_background"
         android:elevation="36dp">
 
@@ -178,7 +178,7 @@
                     android:text="Dashboard"
                     android:textAlignment="center"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="34dp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:id="@+id/fname"></TextView>
             </androidx.cardview.widget.CardView>
@@ -190,7 +190,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.5"
+        android:layout_weight="2.6"
         android:background="#FFFF"
 
         android:elevation="36dp">
@@ -242,6 +242,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sensor1"
+                        android:id="@+id/sensor1"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
@@ -249,6 +250,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sensor2"
+                        android:id="@+id/sensor2"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
@@ -256,6 +258,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sensor3"
+                        android:id="@+id/sensor3"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
@@ -333,14 +336,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Temprature &amp;\n Humidity Sensor"
+                        android:text="Weather"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Temprature"
+                        android:text="Temp"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />

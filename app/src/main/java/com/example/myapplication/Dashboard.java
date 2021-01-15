@@ -187,7 +187,7 @@ public class Dashboard extends AppCompatActivity {
         logout = (Button) findViewById(R.id.dlogout);
         name = (TextView) findViewById(R.id.dname);
 
-        name.setText("Welcome " + getIntent().getStringExtra("name"));
+        name.setText("Welcome to dashboard " + getIntent().getStringExtra("name"));
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,10 +230,10 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void run() {
                 textLocation_lat.setText(valuelat);
-                Double lati = Double.valueOf(valuelat).doubleValue();
-                Double longi = Double.valueOf(valuelong).doubleValue();
-                myref1.child("lat").setValue(lati);
-                myref1.child("long").setValue(longi);
+//                Double lati = Double.valueOf(valuelat).doubleValue();
+//                Double longi = Double.valueOf(valuelong).doubleValue();
+//                myref1.child("lat").setValue(lati);
+//                myref1.child("long").setValue(longi);
                 textLocation_long.setText(valuelong);
 
 
