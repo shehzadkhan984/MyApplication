@@ -18,6 +18,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -34,11 +40,17 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DecimalFormat;
+
 public class Dashboard extends AppCompatActivity {
-    TextView name, textLocation_lat,textLocation_long,sensor1,sensor2,sensor3;
-    Button logout,start,stop;
+    TextView name, textLocation_lat,textLocation_long,sensor1,sensor2,sensor3,tempra,humidity;
+    Button logout,stop;
     private Intent serviceIntent;
-    private Button buttonStart,buttonStop;
+    private Button buttonStop;
 
     static Dashboard instance;
     LocationRequest locationRequest;
@@ -47,6 +59,7 @@ public class Dashboard extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myref1 = database.getReference("Location");
     DatabaseReference myref2 = database.getReference("Sensors");
+    DatabaseReference myref3 = database.getReference("weather");
 //    DatabaseReference myref2 = database.getReference("long");
 
 
@@ -62,16 +75,18 @@ public class Dashboard extends AppCompatActivity {
         sensor1 = (TextView) findViewById(R.id.sensor1);
         sensor2 = (TextView) findViewById(R.id.sensor2);
         sensor3 = (TextView) findViewById(R.id.sensor3);
-        buttonStart = (Button) findViewById(R.id.dstart);
+        tempra = (TextView) findViewById(R.id.temp);
+        humidity = (TextView) findViewById(R.id.humidity);
+
         buttonStop = (Button) findViewById(R.id.dstop);
         serviceIntent = new Intent(getApplicationContext(),Myservice.class);
-        buttonStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startService(new Intent(getApplicationContext(),Myservice.class));
-
-            }
-        });
+//        buttonStart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//            }
+//        });
         buttonStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,6 +111,46 @@ public class Dashboard extends AppCompatActivity {
                 }
                 else if (sens3 <= 100){
                     sensor3.setTextColor(Color.parseColor("#FF0000"));
+
+                }
+                if (sens1 <= 100 && sens2 > 100 && sens3 > 100){
+                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+
+
+
+                }else if (sens1 > 100 && sens2 <= 100 && sens3 > 100){
+                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+
+
+                }
+                else if (sens1 > 100 && sens2 > 100 && sens3 <= 100){
+                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+
+
+
+
+                }
+                else if (sens1 <= 100 && sens2 <= 100 && sens3 > 100){
+                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+
+
+
+
+                }
+                else if (sens1 <= 100 && sens2 > 100 && sens3 <= 100){
+                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+
+
+
+
+                }
+                else if (sens1 > 100 && sens2 <= 100 && sens3 <= 100){
+                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+
+
 
                 }
             }
@@ -180,6 +235,78 @@ public class Dashboard extends AppCompatActivity {
                 myref1.child("lat").setValue(lati);
                 myref1.child("long").setValue(longi);
                 textLocation_long.setText(valuelong);
+
+
+
+            }
+        });
+
+    }
+
+
+
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        startService(new Intent(getApplicationContext(),Myservice.class));
+        find_weather();
+
+
+//        startService(new Intent(getApplicationContext(),Myservice.class));
+    }
+    public void find_weather(){
+        ValueEventListener listener = myref1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Double latitude = snapshot.child("lat").getValue(Double.class);
+                Double longitude = snapshot.child("long").getValue(Double.class);
+                String apikey = "4a500557fb7eeb2fdfa2e59eb50e3e4f";
+                String url = "https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&appid=4a500557fb7eeb2fdfa2e59eb50e3e4f";
+                JsonObjectRequest jor = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject main_obj = response.getJSONObject("main");
+                            JSONArray array = response.getJSONArray("weather");
+                            JSONObject object = array.getJSONObject(0);
+                            DecimalFormat form =  new DecimalFormat("#.##");
+                            String temp = String.valueOf(main_obj.getDouble("temp")-273.15);
+                            String feel = String.valueOf(main_obj.getDouble("feels_like")-273.15);
+                            String humi = main_obj.getString("humidity");
+                            Double temprat = Double.valueOf(temp).doubleValue();
+                            Double feel_like = Double.valueOf(feel).doubleValue();
+                            Integer humidit = Integer.valueOf(humi);
+                            myref3.child("temp").setValue(temprat);
+                            myref3.child("humidity").setValue(humidit);
+                            myref3.child("feel_like").setValue(form.format(feel_like));
+
+                            humidity.setText("humidity" +humi);
+                            tempra.setText("temp "+temp);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+                RequestQueue queue = Volley.newRequestQueue(Dashboard.this);
+                queue.add(jor);
+
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });

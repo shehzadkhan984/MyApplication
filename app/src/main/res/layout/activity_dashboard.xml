@@ -203,14 +203,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sensor1"
+                        android:text="ditch"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sensor1"
+                        android:text="stairs"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
@@ -242,7 +242,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Temprature &amp;\n Humidity Sensor"
+                        android:text="Weather"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
@@ -250,6 +250,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Temprature"
+                        android:id="@+id/temp"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
@@ -257,6 +258,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Humidity"
+                        android:id="@+id/humidity"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
@@ -299,19 +301,19 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
-                    <Button
-                        android:id="@+id/dstart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@color/colorPrimary"
-                        android:text="START"
+<!--                    <Button-->
+<!--                        android:id="@+id/dstart"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:layout_marginBottom="5dp"-->
+<!--                        android:background="@color/colorPrimary"-->
+<!--                        android:text="START"-->
 
-                        android:textColor="#ffff"
-                        android:textColorHighlight="@color/colorPrimary"
-                        android:textColorLink="@color/colorPrimary"
-                        android:textCursorDrawable="@color/colorPrimary"
-                        android:textSize="18dp" />
+<!--                        android:textColor="#ffff"-->
+<!--                        android:textColorHighlight="@color/colorPrimary"-->
+<!--                        android:textColorLink="@color/colorPrimary"-->
+<!--                        android:textCursorDrawable="@color/colorPrimary"-->
+<!--                        android:textSize="18dp" />-->
                     <Button
                         android:id="@+id/dstop"
                         android:layout_width="wrap_content"
@@ -358,7 +360,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sensor1"
+                        android:text="lat"
                         android:id="@+id/txt_location_lat"
                         android:textStyle="bold"
                         android:textAlignment="center"
@@ -366,7 +368,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sensor1"
+                        android:text="long"
                         android:id="@+id/txt_location_long"
                         android:textStyle="bold"
                         android:textAlignment="center"
