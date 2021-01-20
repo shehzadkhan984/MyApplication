@@ -30,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Family extends AppCompatActivity {
     TextView name,lati,longi;
-    TextView textLocation_lat,textLocation_long,sensor1,sensor2,sensor3,tempra,humidity;
+    TextView textLocation_lat,textLocation_long,sensor1,sensor2,sensor3,tempra,humidi,ditches,stairs;
     Button logout,location_view;
     FirebaseDatabase firebasedatabase;
     DatabaseReference myref;
@@ -42,6 +42,7 @@ public class Family extends AppCompatActivity {
     DatabaseReference myref2 = database.getReference("weather");
 
     DatabaseReference myref3 = database.getReference("Sensors");
+    DatabaseReference myref4 = database.getReference("obstacle");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,10 @@ public class Family extends AppCompatActivity {
         sensor1 = (TextView) findViewById(R.id.sensor1);
         sensor2 = (TextView) findViewById(R.id.sensor2);
         sensor3 = (TextView) findViewById(R.id.sensor3);
+        tempra = (TextView) findViewById(R.id.temp);
+        humidi = (TextView) findViewById(R.id.humidit);
+        ditches = (TextView) findViewById(R.id.ditch);
+        stairs = (TextView) findViewById(R.id.stair);
 
 //        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Location");
 //        databaseReference.addValueEventListener(new ValueEventListener() {
@@ -79,7 +84,56 @@ public class Family extends AppCompatActivity {
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
-        ValueEventListener listener = myref3.addValueEventListener(new ValueEventListener() {
+        ValueEventListener listener = myref2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                double temprature = snapshot.child("temp").getValue(double.class);
+                int humidit = snapshot.child("humidity").getValue(int.class);
+                tempra.setText("temp "+temprature);
+                humidi.setText("humid "+humidit);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        ValueEventListener listener2 = myref4.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                int ditch = snapshot.child("ditch").getValue(int.class);
+                int stair = snapshot.child("stair").getValue(int.class);
+                stairs.setText("stair "+stair);
+                ditches.setText("ditch "+ditch);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        ValueEventListener listener3= myref1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                Double latitude = snapshot.child("lat").getValue(Double.class);
+                Double longitude = (Double) snapshot.child("long").getValue(Double.class);
+                lati.setText(latitude.toString());
+                longi.setText(longitude.toString());
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        ValueEventListener listener1 = myref3.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                Notification

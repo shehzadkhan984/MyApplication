@@ -297,14 +297,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sensor1"
+                        android:text="Ditch"
                         android:textStyle="bold"
+                        android:id="@+id/ditch"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sensor1"
+                        android:text="Stairs"
+                        android:id="@+id/stair"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
@@ -344,6 +346,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Temp"
+                        android:id="@+id/temp"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
@@ -351,6 +354,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Humidity"
+                        android:id="@+id/humidit"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
@@ -406,11 +410,19 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_gravity="center_vertical|center_horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Location"
+                        android:textStyle="bold"
+
+                        android:textAlignment="center"
+                        android:gravity="center_horizontal" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sensor1"
+                        android:text="Lat"
                         android:textStyle="bold"
                         android:id="@+id/lati"
                         android:textAlignment="center"
@@ -418,7 +430,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sensor1"
+                        android:text="Long"
                         android:id="@+id/longi"
                         android:textStyle="bold"
                         android:textAlignment="center"

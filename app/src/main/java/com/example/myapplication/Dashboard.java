@@ -12,7 +12,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,6 +30,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -60,6 +63,7 @@ public class Dashboard extends AppCompatActivity {
     DatabaseReference myref1 = database.getReference("Location");
     DatabaseReference myref2 = database.getReference("Sensors");
     DatabaseReference myref3 = database.getReference("weather");
+    DatabaseReference myref4= database.getReference("User Data");
 //    DatabaseReference myref2 = database.getReference("long");
 
 
@@ -230,11 +234,98 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void run() {
                 textLocation_lat.setText(valuelat);
-//                Double lati = Double.valueOf(valuelat).doubleValue();
-//                Double longi = Double.valueOf(valuelong).doubleValue();
+                final Double lati = Double.valueOf(valuelat).doubleValue();
+                final Double longi = Double.valueOf(valuelong).doubleValue();
 //                myref1.child("lat").setValue(lati);
 //                myref1.child("long").setValue(longi);
                 textLocation_long.setText(valuelong);
+// sending message to family member
+                ValueEventListener listener1 = myref2.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        final int notifi = snapshot.child("noti").getValue(int.class);
+                        ValueEventListener listener2 = myref4.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                                    UserData user = snapshot1.getValue(UserData.class);
+                                    String fmember1 = user.fmember;
+                                    if (fmember1.equals("family Member")){
+                                        String phoneno = user.phoneno;
+                                        if (notifi==1){
+//                                            String number = "0348 2072873";
+                                            String part1="hy my name is shehzad and i am in emergency kindly click the link below \n";
+                                            String part2 ="https://www.google.com/maps/search/?api=1&query="+lati+","+longi;
+                                            String merged = part1+part2;
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                                                if (checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
+                                                    try {
+                                                        SmsManager smsManager= SmsManager.getDefault();
+                                                        smsManager.sendTextMessage(phoneno,null,merged,null,null);
+                                                        Toast.makeText(Dashboard.this,"message sent",Toast.LENGTH_SHORT).show();
+
+
+                                                    }catch (Exception e){
+                                                        e.printStackTrace();
+                                                        Toast.makeText(Dashboard.this,"failed to send message",Toast.LENGTH_SHORT).show();
+
+                                                    }
+                                                }else{
+                                                    requestPermissions(new String[]{Manifest.permission.SEND_SMS},1);
+                                                }
+
+                                            }
+
+                                        }
+                                        myref2.child("noti").setValue(0);
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+//                        if (notifi==1){
+//                            String number = "0348 2072873";
+//                            String part1="hy my name is shehzad and i am in emergency kindly click the link below \n";
+//                            String part2 ="https://www.google.com/maps/search/?api=1&query="+lati+","+longi;
+//                            String merged = part1+part2;
+//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+//                                if (checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
+//                                    try {
+//                                        SmsManager smsManager= SmsManager.getDefault();
+//                                        smsManager.sendTextMessage(number,null,merged,null,null);
+//                                        Toast.makeText(Dashboard.this,"message sent",Toast.LENGTH_SHORT).show();
+//                                        myref2.child("noti").setValue(0);
+//
+//                                    }catch (Exception e){
+//                                        e.printStackTrace();
+//                                        Toast.makeText(Dashboard.this,"failed to send message",Toast.LENGTH_SHORT).show();
+//
+//                                    }
+//                                }else{
+//                                    requestPermissions(new String[]{Manifest.permission.SEND_SMS},1);
+//                                }
+//
+//                            }
+//
+//
+//
+//
+//
+//
+//                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
 
 
@@ -242,6 +333,7 @@ public class Dashboard extends AppCompatActivity {
         });
 
     }
+
 
 
 
