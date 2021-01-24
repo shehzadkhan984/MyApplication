@@ -161,26 +161,6 @@
                         android:textCursorDrawable="@color/colorPrimary" />
 
 
-<!--                    <CheckBox-->
-<!--                        android:id="@+id/rememberme"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_marginBottom="5dp"-->
-<!--                        android:buttonTint="@color/colorPrimary"-->
-<!--                        android:text="Remember Me"-->
-<!--                        android:textColorHighlight="@color/colorPrimary"-->
-<!--                        android:textColorLink="@color/colorPrimary"-->
-<!--                        android:textCursorDrawable="@color/colorPrimary"></CheckBox>-->
-<!--                    <CheckBox-->
-<!--                        android:id="@+id/Family"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:layout_marginBottom="5dp"-->
-<!--                        android:buttonTint="@color/colorPrimary"-->
-<!--                        android:text="Are you a family member ?"-->
-<!--                        android:textColorHighlight="@color/colorPrimary"-->
-<!--                        android:textColorLink="@color/colorPrimary"-->
-<!--                        android:textCursorDrawable="@color/colorPrimary"></CheckBox>-->
 
                     <Button
                         android:id="@+id/Login"

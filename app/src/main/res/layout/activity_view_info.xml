@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    android:weightSum="4"
+    android:background="@color/colorPrimary"
+    tools:context=".ViewInfo">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <ImageView
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginLeft="34dp"
+            android:src="@mipmap/ic_logo_app"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="48dp"
+            android:layout_marginRight="48dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:fontFamily="@font/segoe_ui_bold"
+                android:text="E - Walk"
+                android:textColor="@color/colorTextWhite"
+                android:textSize="36dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/seg_ui_semibold"
+                android:text="Smart System for Visually impaire person"
+                android:textColor="@color/colorTextWhite"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:background="@drawable/card_background"
+        android:elevation="36dp">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rowCount="2"
+            android:columnCount="3"
+            android:layout_below="@+id/title_template"
+            android:layout_marginTop="25dp"
+            tools:ignore="UnknownId">
+            <!--            sensors data 1-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:layout_gravity="fill"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="7dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="VIEW INFO"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="22dp"
+                    android:textStyle="bold"></TextView>
+            </androidx.cardview.widget.CardView>
+
+            <!--            ab aya msg ka-->
+        </GridLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.6"
+        android:background="#ffffff"
+        android:elevation="36dp">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rowCount="2"
+            android:columnCount="3"
+            android:layout_marginTop="25dp">
+
+            <!--            sensors data 3-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:layout_gravity="fill"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="7dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical|center_horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Name : "
+                            android:layout_marginLeft="15px"
+                            android:id="@+id/name"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22dp"
+                            android:textStyle="bold"></TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Age : "
+                            android:id="@+id/age"
+                            android:layout_marginLeft="15px"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22dp"
+                            android:textStyle="bold"></TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Member : "
+                            android:id="@+id/mem"
+                            android:layout_marginLeft="15px"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22dp"
+                            android:textStyle="bold"></TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Gender : "
+                            android:id="@+id/gen"
+                            android:layout_marginLeft="15px"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22dp"
+                            android:textStyle="bold"></TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Gmail : "
+                            android:layout_marginLeft="15px"
+                            android:id="@+id/gmal"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22dp"
+                            android:textStyle="bold"></TextView>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Phone No. : "
+                            android:id="@+id/mobile_no"
+                            android:layout_marginLeft="15px"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22dp"
+                            android:textStyle="bold"></TextView>
+
+
+
+
+
+
+                        <!--                    <CheckBox-->
+                        <!--                        android:id="@+id/rememberme"-->
+                        <!--                        android:layout_width="match_parent"-->
+                        <!--                        android:layout_height="match_parent"-->
+                        <!--                        android:layout_marginBottom="5dp"-->
+                        <!--                        android:buttonTint="@color/colorPrimary"-->
+                        <!--                        android:text="Remember Me"-->
+                        <!--                        android:textColorHighlight="@color/colorPrimary"-->
+                        <!--                        android:textColorLink="@color/colorPrimary"-->
+                        <!--                        android:textCursorDrawable="@color/colorPrimary"></CheckBox>-->
+                        <!--                    <CheckBox-->
+                        <!--                        android:id="@+id/Family"-->
+                        <!--                        android:layout_width="match_parent"-->
+                        <!--                        android:layout_height="match_parent"-->
+                        <!--                        android:layout_marginBottom="5dp"-->
+                        <!--                        android:buttonTint="@color/colorPrimary"-->
+                        <!--                        android:text="Are you a family member ?"-->
+                        <!--                        android:textColorHighlight="@color/colorPrimary"-->
+                        <!--                        android:textColorLink="@color/colorPrimary"-->
+                        <!--                        android:textCursorDrawable="@color/colorPrimary"></CheckBox>-->
+
+                        <Button
+                            android:id="@+id/call"
+                            android:layout_width="200dp"
+                            android:layout_height="40dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/colorPrimary"
+                            android:text="Call"
+                            android:textColor="#ffff"
+                            android:textColorHighlight="@color/colorPrimary"
+                            android:textColorLink="@color/colorPrimary"
+                            android:textCursorDrawable="@color/colorPrimary"
+                            android:textSize="18dp" />
+                        <!--                    <TextView-->
+                        <!--                        android:layout_width="wrap_content"-->
+                        <!--                        android:layout_height="match_parent"-->
+                        <!--                        android:text="Do you wan to register? "-->
+                        <!--                        android:textAlignment="center"-->
+                        <!--                        android:layout_gravity="center_horizontal">-->
+
+                        <!--                    </TextView>-->
+
+
+
+
+
+
+
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--            ab aya msg ka-->
+        </GridLayout>
+    </RelativeLayout>
+
+</LinearLayout>

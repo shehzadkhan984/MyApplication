@@ -31,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Family extends AppCompatActivity {
     TextView name,lati,longi;
     TextView textLocation_lat,textLocation_long,sensor1,sensor2,sensor3,tempra,humidi,ditches,stairs;
-    Button logout,location_view;
+    Button logout,location_view, ViewInfo;
     FirebaseDatabase firebasedatabase;
     DatabaseReference myref;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -43,6 +43,7 @@ public class Family extends AppCompatActivity {
 
     DatabaseReference myref3 = database.getReference("Sensors");
     DatabaseReference myref4 = database.getReference("obstacle");
+    DatabaseReference myref5 = database.getReference("Notification");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +118,38 @@ public class Family extends AppCompatActivity {
 
             }
         });
+        ValueEventListener listener4 = myref5.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                int notifi = snapshot.child("noti").getValue(int.class);
+                if (notifi == 1){
+                    NotificationCompat.Builder mbuilder = new NotificationCompat.Builder(Family.this,"My Notification");
+                    mbuilder.setContentTitle("Emergency");
+                    mbuilder.setContentText("Emergency situation");
+                    mbuilder.setSmallIcon(R.mipmap.ic_logo_app);
+                    mbuilder.setAutoCancel(true);
+                    Intent intenti = new Intent(Family.this,MapsActivity.class);
+                    intenti.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                    PendingIntent pendingIntent = PendingIntent.getActivity(Family.this,0,intenti,PendingIntent.FLAG_UPDATE_CURRENT);
+                    mbuilder.setContentIntent(pendingIntent);
+
+                    NotificationManagerCompat managerCompat = NotificationManagerCompat.from(Family.this);
+                    managerCompat.notify(1, mbuilder.build());
+                    myref5.child("noti").setValue(0);
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         ValueEventListener listener3= myref1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -138,7 +171,7 @@ public class Family extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                Notification
 
-                int notifi = snapshot.child("noti").getValue(int.class);
+
                 int sens1 = snapshot.child("S1").getValue(int.class);
                 sensor1.setText("Sensor1 "+sens1);
                 int sens2 = snapshot.child("S2").getValue(int.class);
@@ -170,24 +203,7 @@ public class Family extends AppCompatActivity {
                     sensor3.setTextColor(Color.parseColor("#FF0000"));
                 }
 
-                if (notifi == 1){
-                    NotificationCompat.Builder mbuilder = new NotificationCompat.Builder(Family.this,"My Notification");
-                    mbuilder.setContentTitle("Emergency");
-                    mbuilder.setContentText("Emergency situation");
-                    mbuilder.setSmallIcon(R.mipmap.ic_logo_app);
-                    mbuilder.setAutoCancel(true);
-                    Intent intenti = new Intent(Family.this,MapsActivity.class);
-                    intenti.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                    PendingIntent pendingIntent = PendingIntent.getActivity(Family.this,0,intenti,PendingIntent.FLAG_UPDATE_CURRENT);
-                    mbuilder.setContentIntent(pendingIntent);
-
-                    NotificationManagerCompat managerCompat = NotificationManagerCompat.from(Family.this);
-                    managerCompat.notify(1, mbuilder.build());
-                    myref3.child("noti").setValue(0);
-
-
-                }
 
             }
 
@@ -198,6 +214,16 @@ public class Family extends AppCompatActivity {
         });
         name.setText("Welcome to dashboard "+getIntent().getStringExtra("name"));
         location_view = (Button) findViewById(R.id.location_view);
+        ViewInfo = (Button) findViewById(R.id.viewinfo);
+        ViewInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Family.this,ViewInfo.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
+            }
+        });
         location_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

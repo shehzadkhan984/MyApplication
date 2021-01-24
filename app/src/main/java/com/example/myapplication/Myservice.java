@@ -37,6 +37,7 @@ public class Myservice extends Service {
     //player1,player2,player3,player4,player5,player6,player7;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myref2 = database.getReference("Sensors");
+    DatabaseReference myref3 = database.getReference("Notification");
 
     @Nullable
     @Override
@@ -81,7 +82,7 @@ public class Myservice extends Service {
 
 
 
-                if (sens1 <= 100 && sens2 > 100 && sens3 > 100 && notifi==0){
+                if (sens1 <= 100 && sens2 > 100 && sens3 > 100){
                     soundPool.pause(sound2id);
                     soundPool.pause(sound3id);
                     soundPool.pause(sound4id);
@@ -92,7 +93,7 @@ public class Myservice extends Service {
 
 
 
-                }else if (sens1 > 100 && sens2 <= 100 && sens3 > 100 && notifi==0){
+                }else if (sens1 > 100 && sens2 <= 100 && sens3 > 100){
                     soundPool.pause(sound1id);
                     soundPool.pause(sound3id);
                     soundPool.pause(sound4id);
@@ -103,7 +104,7 @@ public class Myservice extends Service {
 
 
                 }
-                else if (sens1 > 100 && sens2 > 100 && sens3 <= 100 && notifi==0){
+                else if (sens1 > 100 && sens2 > 100 && sens3 <= 100){
                     soundPool.pause(sound2id);
                     soundPool.pause(sound1id);
                     soundPool.pause(sound4id);
@@ -115,7 +116,7 @@ public class Myservice extends Service {
 
 
                 }
-                else if (sens1 <= 100 && sens2 <= 100 && sens3 > 100 && notifi==0){
+                else if (sens1 <= 100 && sens2 <= 100 && sens3 > 100){
                     soundPool.pause(sound2id);
                     soundPool.pause(sound3id);
                     soundPool.pause(sound1id);
@@ -127,7 +128,7 @@ public class Myservice extends Service {
 
 
                 }
-                else if (sens1 <= 100 && sens2 > 100 && sens3 <= 100 && notifi==0){
+                else if (sens1 <= 100 && sens2 > 100 && sens3 <= 100){
                     soundPool.pause(sound2id);
                     soundPool.pause(sound3id);
                     soundPool.pause(sound4id);
@@ -139,7 +140,7 @@ public class Myservice extends Service {
 
 
                 }
-                else if (sens1 > 100 && sens2 <= 100 && sens3 <= 100 && notifi==0){
+                else if (sens1 > 100 && sens2 <= 100 && sens3 <= 100){
                     soundPool.pause(sound2id);
                     soundPool.pause(sound3id);
                     soundPool.pause(sound4id);
@@ -150,6 +151,27 @@ public class Myservice extends Service {
 
 
                 }
+//                if (notifi == 1){
+//                    soundPool.pause(sound2id);
+//                    soundPool.pause(sound3id);
+//                    soundPool.pause(sound4id);
+//                    soundPool.pause(sound5id);
+//                    soundPool.pause(sound1id);
+//                    soundPool.pause(sound6id);
+//                    sound7id = soundPool.play(sound7,1,1,0,0,1);
+//
+//                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        ValueEventListener listener1 = myref3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int notifi = snapshot.child("noti").getValue(int.class);
                 if (notifi == 1){
                     soundPool.pause(sound2id);
                     soundPool.pause(sound3id);
@@ -160,6 +182,7 @@ public class Myservice extends Service {
                     sound7id = soundPool.play(sound7,1,1,0,0,1);
 
                 }
+
             }
 
             @Override

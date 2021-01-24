@@ -64,6 +64,7 @@ public class Dashboard extends AppCompatActivity {
     DatabaseReference myref2 = database.getReference("Sensors");
     DatabaseReference myref3 = database.getReference("weather");
     DatabaseReference myref4= database.getReference("User Data");
+    DatabaseReference myref5= database.getReference("Notification");
 //    DatabaseReference myref2 = database.getReference("long");
 
 
@@ -240,7 +241,7 @@ public class Dashboard extends AppCompatActivity {
 //                myref1.child("long").setValue(longi);
                 textLocation_long.setText(valuelong);
 // sending message to family member
-                ValueEventListener listener1 = myref2.addValueEventListener(new ValueEventListener() {
+                ValueEventListener listener1 = myref5.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         final int notifi = snapshot.child("noti").getValue(int.class);
@@ -253,7 +254,7 @@ public class Dashboard extends AppCompatActivity {
                                     if (fmember1.equals("family Member")){
                                         String phoneno = user.phoneno;
                                         if (notifi==1){
-//                                            String number = "0348 2072873";
+//
                                             String part1="hy my name is shehzad and i am in emergency kindly click the link below \n";
                                             String part2 ="https://www.google.com/maps/search/?api=1&query="+lati+","+longi;
                                             String merged = part1+part2;
@@ -275,9 +276,10 @@ public class Dashboard extends AppCompatActivity {
                                                 }
 
                                             }
+                                            myref5.child("noti").setValue(0);
 
                                         }
-                                        myref2.child("noti").setValue(0);
+
                                     }
                                 }
 

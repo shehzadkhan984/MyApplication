@@ -234,7 +234,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="obsacle sensor"
+                        android:text="obstacle sensor"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
@@ -474,6 +474,7 @@
                         android:layout_marginBottom="5dp"
                         android:background="@color/colorPrimary"
                         android:text="View info"
+
 
                         android:textColor="#ffff"
                         android:textColorHighlight="@color/colorPrimary"
