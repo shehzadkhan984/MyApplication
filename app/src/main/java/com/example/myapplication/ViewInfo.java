@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.widget.TextView;
@@ -39,7 +40,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DatabaseReference;
 
 public class ViewInfo extends AppCompatActivity {
-    TextView name, Age,Email,member,gender,phone;
+    TextView name, Age,Email,member,gender,phone,calls;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myref4= database.getReference("User Data");
 
@@ -53,6 +54,7 @@ public class ViewInfo extends AppCompatActivity {
         member = (TextView) findViewById(R.id.mem);
         gender = (TextView) findViewById(R.id.gen);
         phone = (TextView) findViewById(R.id.mobile_no);
+        calls =  (Button) findViewById(R.id.call);
 
         ValueEventListener listener2 = myref4.addValueEventListener(new ValueEventListener() {
             @Override
@@ -78,6 +80,30 @@ public class ViewInfo extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+        calls.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ValueEventListener listener3 = myref4.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                            UserData user = snapshot1.getValue(UserData.class);
+                            String fmember1 = user.fmember;
+                            if (fmember1.equals("Visuall imapaired")){
+                                String phoneno = user.phoneno;
+                                Intent callintent = new Intent(Intent.ACTION_CALL);
+                                callintent.setData(Uri.parse("tel:"+phoneno));
+                                startActivity(callintent);
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
     }

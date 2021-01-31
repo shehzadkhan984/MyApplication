@@ -50,7 +50,7 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 
 public class Dashboard extends AppCompatActivity {
-    TextView name, textLocation_lat,textLocation_long,sensor1,sensor2,sensor3,tempra,humidity;
+    TextView name, textLocation_lat,textLocation_long,sensor1,sensor2,sensor3,tempra,humidity,ditchess,sensorss;
     Button logout,stop;
     private Intent serviceIntent;
     private Button buttonStop;
@@ -65,8 +65,7 @@ public class Dashboard extends AppCompatActivity {
     DatabaseReference myref3 = database.getReference("weather");
     DatabaseReference myref4= database.getReference("User Data");
     DatabaseReference myref5= database.getReference("Notification");
-//    DatabaseReference myref2 = database.getReference("long");
-
+    DatabaseReference myref6= database.getReference("obstacle");
 
     public static Dashboard getInstance() {
         return instance;
@@ -82,6 +81,8 @@ public class Dashboard extends AppCompatActivity {
         sensor3 = (TextView) findViewById(R.id.sensor3);
         tempra = (TextView) findViewById(R.id.temp);
         humidity = (TextView) findViewById(R.id.humidity);
+        sensorss = (TextView) findViewById(R.id.stair);
+        ditchess = (TextView) findViewById(R.id.ditch);
 
         buttonStop = (Button) findViewById(R.id.dstop);
         serviceIntent = new Intent(getApplicationContext(),Myservice.class);
@@ -98,7 +99,7 @@ public class Dashboard extends AppCompatActivity {
                 stopService(new Intent(getApplicationContext(),Myservice.class));
             }
         });
-        ValueEventListener listener = myref2.addValueEventListener(new ValueEventListener() {
+        ValueEventListener listener2 = myref2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int sens1 = snapshot.child("S1").getValue(int.class);
@@ -109,55 +110,53 @@ public class Dashboard extends AppCompatActivity {
                 sensor3.setText("Sensor3 "+sens3);
                 if (sens1 <= 100 ){
                     sensor1.setTextColor(Color.parseColor("#FF0000"));
-
                 }else if ( sens2 <= 100 ){
                     sensor2.setTextColor(Color.parseColor("#FF0000"));
-
                 }
                 else if (sens3 <= 100){
                     sensor3.setTextColor(Color.parseColor("#FF0000"));
-
                 }
                 if (sens1 <= 100 && sens2 > 100 && sens3 > 100){
                     sensor1.setTextColor(Color.parseColor("#FF0000"));
-
-
-
                 }else if (sens1 > 100 && sens2 <= 100 && sens3 > 100){
                     sensor2.setTextColor(Color.parseColor("#FF0000"));
-
-
                 }
                 else if (sens1 > 100 && sens2 > 100 && sens3 <= 100){
                     sensor3.setTextColor(Color.parseColor("#FF0000"));
-
-
-
-
                 }
                 else if (sens1 <= 100 && sens2 <= 100 && sens3 > 100){
                     sensor1.setTextColor(Color.parseColor("#FF0000"));
                     sensor2.setTextColor(Color.parseColor("#FF0000"));
-
-
-
-
                 }
                 else if (sens1 <= 100 && sens2 > 100 && sens3 <= 100){
                     sensor1.setTextColor(Color.parseColor("#FF0000"));
                     sensor3.setTextColor(Color.parseColor("#FF0000"));
-
-
-
-
                 }
                 else if (sens1 > 100 && sens2 <= 100 && sens3 <= 100){
                     sensor2.setTextColor(Color.parseColor("#FF0000"));
                     sensor3.setTextColor(Color.parseColor("#FF0000"));
-
-
-
+                }else if (sens1 <= 100 && sens2 <= 100 && sens3 <= 100){
+                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+                    sensor3.setTextColor(Color.parseColor("#FF0000"));
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        ValueEventListener listner3 = myref6.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int sens4 = snapshot.child("ditch").getValue(int.class);
+                if (sens4 > 50){
+                    sensorss.setText("Ditch "+sens4);
+                }else if (sens4 < 40){
+                    ditchess.setText("Stair "+sens4);
+                }
+
             }
 
             @Override
@@ -253,9 +252,9 @@ public class Dashboard extends AppCompatActivity {
                                     String fmember1 = user.fmember;
                                     if (fmember1.equals("family Member")){
                                         String phoneno = user.phoneno;
+                                        String name = user.fname;
                                         if (notifi==1){
-//
-                                            String part1="hy my name is shehzad and i am in emergency kindly click the link below \n";
+                                            String part1="hello "+name+" here its an emergency. to trace my location kindly click the link below\n";
                                             String part2 ="https://www.google.com/maps/search/?api=1&query="+lati+","+longi;
                                             String merged = part1+part2;
                                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -264,91 +263,36 @@ public class Dashboard extends AppCompatActivity {
                                                         SmsManager smsManager= SmsManager.getDefault();
                                                         smsManager.sendTextMessage(phoneno,null,merged,null,null);
                                                         Toast.makeText(Dashboard.this,"message sent",Toast.LENGTH_SHORT).show();
-
-
                                                     }catch (Exception e){
                                                         e.printStackTrace();
                                                         Toast.makeText(Dashboard.this,"failed to send message",Toast.LENGTH_SHORT).show();
-
                                                     }
                                                 }else{
                                                     requestPermissions(new String[]{Manifest.permission.SEND_SMS},1);
                                                 }
-
                                             }
                                             myref5.child("noti").setValue(0);
-
                                         }
-
                                     }
                                 }
-
                             }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
-
                             }
                         });
-
-//                        if (notifi==1){
-//                            String number = "0348 2072873";
-//                            String part1="hy my name is shehzad and i am in emergency kindly click the link below \n";
-//                            String part2 ="https://www.google.com/maps/search/?api=1&query="+lati+","+longi;
-//                            String merged = part1+part2;
-//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-//                                if (checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
-//                                    try {
-//                                        SmsManager smsManager= SmsManager.getDefault();
-//                                        smsManager.sendTextMessage(number,null,merged,null,null);
-//                                        Toast.makeText(Dashboard.this,"message sent",Toast.LENGTH_SHORT).show();
-//                                        myref2.child("noti").setValue(0);
-//
-//                                    }catch (Exception e){
-//                                        e.printStackTrace();
-//                                        Toast.makeText(Dashboard.this,"failed to send message",Toast.LENGTH_SHORT).show();
-//
-//                                    }
-//                                }else{
-//                                    requestPermissions(new String[]{Manifest.permission.SEND_SMS},1);
-//                                }
-//
-//                            }
-//
-//
-//
-//
-//
-//
-//                        }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
-
-
-
             }
         });
-
     }
-
-
-
-
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
         startService(new Intent(getApplicationContext(),Myservice.class));
         find_weather();
-
-
 //        startService(new Intent(getApplicationContext(),Myservice.class));
     }
     public void find_weather(){
@@ -376,36 +320,23 @@ public class Dashboard extends AppCompatActivity {
                             myref3.child("temp").setValue(temprat);
                             myref3.child("humidity").setValue(humidit);
                             myref3.child("feel_like").setValue(form.format(feel_like));
-
                             humidity.setText("humidity" +humi);
                             tempra.setText("temp "+temp);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
                     }
                 });
                 RequestQueue queue = Volley.newRequestQueue(Dashboard.this);
                 queue.add(jor);
-
-
-
-
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
     }
-
-
 }
