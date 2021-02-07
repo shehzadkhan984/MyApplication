@@ -42,8 +42,8 @@ public class Family extends AppCompatActivity {
     DatabaseReference myref2 = database.getReference("weather");
 
     DatabaseReference myref3 = database.getReference("Sensors");
-    DatabaseReference myref4 = database.getReference("obstacle");
-    DatabaseReference myref5 = database.getReference("Notification");
+    DatabaseReference myref4 = database.getReference("ground");
+    DatabaseReference myref5 = database.getReference("iot");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,11 +104,18 @@ public class Family extends AppCompatActivity {
         ValueEventListener listener2 = myref4.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int sens4 = snapshot.child("ditch_stair").getValue(int.class);
+                if (sens4 > 50){
+                    ditches.setText("ditch "+sens4);
 
-                int ditch = snapshot.child("ditch").getValue(int.class);
-                int stair = snapshot.child("stair").getValue(int.class);
-                stairs.setText("stair "+stair);
-                ditches.setText("ditch "+ditch);
+                }else if (sens4 < 40){
+                    stairs.setText("stair "+sens4);
+                }
+
+//                int ditch = snapshot.child("ditch").getValue(int.class);
+//                int stair = snapshot.child("stair").getValue(int.class);
+//                stairs.setText("stair "+stair);
+//                ditches.setText("ditch "+ditch);
 
 
             }
@@ -169,7 +176,7 @@ public class Family extends AppCompatActivity {
         ValueEventListener listener1 = myref3.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                Notification
+
 
 
                 int sens1 = snapshot.child("S1").getValue(int.class);
@@ -179,13 +186,18 @@ public class Family extends AppCompatActivity {
                 int sens3 = snapshot.child("S3").getValue(int.class);
                 sensor3.setText("Sensor3 "+sens3);
 
+                if (sens1 <= 100 ){
+                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+                }else if ( sens2 <= 100 ){
+                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+                }
+                else if (sens3 <= 100){
+                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+                }
                 if (sens1 <= 100 && sens2 > 100 && sens3 > 100){
                     sensor1.setTextColor(Color.parseColor("#FF0000"));
-
                 }else if (sens1 > 100 && sens2 <= 100 && sens3 > 100){
                     sensor2.setTextColor(Color.parseColor("#FF0000"));
-
-
                 }
                 else if (sens1 > 100 && sens2 > 100 && sens3 <= 100){
                     sensor3.setTextColor(Color.parseColor("#FF0000"));
@@ -201,10 +213,11 @@ public class Family extends AppCompatActivity {
                 else if (sens1 > 100 && sens2 <= 100 && sens3 <= 100){
                     sensor2.setTextColor(Color.parseColor("#FF0000"));
                     sensor3.setTextColor(Color.parseColor("#FF0000"));
+                }else if (sens1 <= 100 && sens2 <= 100 && sens3 <= 100){
+                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+                    sensor3.setTextColor(Color.parseColor("#FF0000"));
                 }
-
-
-
             }
 
             @Override

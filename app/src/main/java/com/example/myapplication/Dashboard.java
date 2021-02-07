@@ -64,8 +64,8 @@ public class Dashboard extends AppCompatActivity {
     DatabaseReference myref2 = database.getReference("Sensors");
     DatabaseReference myref3 = database.getReference("weather");
     DatabaseReference myref4= database.getReference("User Data");
-    DatabaseReference myref5= database.getReference("Notification");
-    DatabaseReference myref6= database.getReference("obstacle");
+    DatabaseReference myref5= database.getReference("iot");
+    DatabaseReference myref6= database.getReference("ground");
 
     public static Dashboard getInstance() {
         return instance;
@@ -150,11 +150,12 @@ public class Dashboard extends AppCompatActivity {
         ValueEventListener listner3 = myref6.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int sens4 = snapshot.child("ditch").getValue(int.class);
+                int sens4 = snapshot.child("ditch_stair").getValue(int.class);
                 if (sens4 > 50){
-                    sensorss.setText("Ditch "+sens4);
-                }else if (sens4 < 40){
                     ditchess.setText("Stair "+sens4);
+
+                }else if (sens4 < 40){
+                    sensorss.setText("Ditch "+sens4);
                 }
 
             }
