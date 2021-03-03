@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -26,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private Button SignupButton;
@@ -33,12 +38,28 @@ public class MainActivity extends AppCompatActivity {
     CheckBox remember, family;
     Button login;
     ProgressBar progressbar2;
+    private SoundPool soundPool;
+
+    private  int sound1,sound2;
+    private int sound1id,sound2id;
+
     FirebaseAuth fAuth;
 
     FirebaseDatabase firebasedatabase;
     private FirebaseAuth.AuthStateListener mauthlistner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ){
+            AudioAttributes audioAttributes = new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build();
+            soundPool = new SoundPool.Builder().setMaxStreams(22).setAudioAttributes(audioAttributes).build();
+
+        }else{
+            soundPool = new SoundPool(22, AudioManager.STREAM_MUSIC,0);
+
+        }
+        sound1 = soundPool.load(this,R.raw.login,1);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         email = (EditText) findViewById(R.id.Email);
@@ -164,9 +185,11 @@ public class MainActivity extends AppCompatActivity {
 
 
                     }else {
+                        soundPool.play(sound1,1,1,0,0,1);
                         Intent i = new Intent(getApplicationContext(),Dashboard.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         i.putExtra("name",name);
+
 
                         startActivity(i);
                     }

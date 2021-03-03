@@ -54,13 +54,10 @@ public class Family extends AppCompatActivity {
         name = findViewById(R.id.fname);
         lati = findViewById(R.id.lati);
         longi = findViewById(R.id.longi);
-        sensor1 = (TextView) findViewById(R.id.sensor1);
-        sensor2 = (TextView) findViewById(R.id.sensor2);
-        sensor3 = (TextView) findViewById(R.id.sensor3);
+
         tempra = (TextView) findViewById(R.id.temp);
         humidi = (TextView) findViewById(R.id.humidit);
-        ditches = (TextView) findViewById(R.id.ditch);
-        stairs = (TextView) findViewById(R.id.stair);
+
 
 //        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Location");
 //        databaseReference.addValueEventListener(new ValueEventListener() {
@@ -101,51 +98,57 @@ public class Family extends AppCompatActivity {
 
             }
         });
-        ValueEventListener listener2 = myref4.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int sens4 = snapshot.child("ditch_stair").getValue(int.class);
-                if (sens4 > 50){
-                    ditches.setText("ditch "+sens4);
-
-                }else if (sens4 < 40){
-                    stairs.setText("stair "+sens4);
-                }
+//        ValueEventListener listener2 = myref4.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                int sens4 = snapshot.child("ditch_stair").getValue(int.class);
+//                if (sens4 > 50){
+//                    ditches.setText("ditch "+sens4);
+//
+//                }else if (sens4 < 40){
+//                    stairs.setText("stair "+sens4);
+//                }
 
 //                int ditch = snapshot.child("ditch").getValue(int.class);
 //                int stair = snapshot.child("stair").getValue(int.class);
 //                stairs.setText("stair "+stair);
 //                ditches.setText("ditch "+ditch);
 
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         ValueEventListener listener4 = myref5.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 int notifi = snapshot.child("noti").getValue(int.class);
                 if (notifi == 1){
-                    NotificationCompat.Builder mbuilder = new NotificationCompat.Builder(Family.this,"My Notification");
-                    mbuilder.setContentTitle("Emergency");
-                    mbuilder.setContentText("Emergency situation");
-                    mbuilder.setSmallIcon(R.mipmap.ic_logo_app);
-                    mbuilder.setAutoCancel(true);
-                    Intent intenti = new Intent(Family.this,MapsActivity.class);
-                    intenti.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-                    PendingIntent pendingIntent = PendingIntent.getActivity(Family.this,0,intenti,PendingIntent.FLAG_UPDATE_CURRENT);
-                    mbuilder.setContentIntent(pendingIntent);
-
-                    NotificationManagerCompat managerCompat = NotificationManagerCompat.from(Family.this);
-                    managerCompat.notify(1, mbuilder.build());
+                    Intent ServiceIntent = new Intent(Family.this, ExampleService.class);
+                    startService(ServiceIntent);
+//                    NotificationCompat.Builder mbuilder = new NotificationCompat.Builder(Family.this,"My Notification");
+//                    mbuilder.setContentTitle("Emergency");
+//                    mbuilder.setContentText("Emergency situation");
+//                    mbuilder.setSmallIcon(R.mipmap.ic_logo_app);
+//                    mbuilder.setAutoCancel(true);
+//                    Intent intenti = new Intent(Family.this,MapsActivity.class);
+//                    intenti.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//
+//                    PendingIntent pendingIntent = PendingIntent.getActivity(Family.this,0,intenti,PendingIntent.FLAG_UPDATE_CURRENT);
+//                    mbuilder.setContentIntent(pendingIntent);
+//
+//                    NotificationManagerCompat managerCompat = NotificationManagerCompat.from(Family.this);
+                    //managerCompat.notify(1, mbuilder.build());
                     myref5.child("noti").setValue(0);
 
+
+                }else{
+                    Intent ServiceIntent = new Intent(Family.this, ExampleService.class);
+                    stopService(ServiceIntent);
 
                 }
 
@@ -173,58 +176,58 @@ public class Family extends AppCompatActivity {
 
             }
         });
-        ValueEventListener listener1 = myref3.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-
-
-                int sens1 = snapshot.child("S1").getValue(int.class);
-                sensor1.setText("Sensor1 "+sens1);
-                int sens2 = snapshot.child("S2").getValue(int.class);
-                sensor2.setText("Sensor2 "+sens2);
-                int sens3 = snapshot.child("S3").getValue(int.class);
-                sensor3.setText("Sensor3 "+sens3);
-
-                if (sens1 <= 100 ){
-                    sensor1.setTextColor(Color.parseColor("#FF0000"));
-                }else if ( sens2 <= 100 ){
-                    sensor2.setTextColor(Color.parseColor("#FF0000"));
-                }
-                else if (sens3 <= 100){
-                    sensor3.setTextColor(Color.parseColor("#FF0000"));
-                }
-                if (sens1 <= 100 && sens2 > 100 && sens3 > 100){
-                    sensor1.setTextColor(Color.parseColor("#FF0000"));
-                }else if (sens1 > 100 && sens2 <= 100 && sens3 > 100){
-                    sensor2.setTextColor(Color.parseColor("#FF0000"));
-                }
-                else if (sens1 > 100 && sens2 > 100 && sens3 <= 100){
-                    sensor3.setTextColor(Color.parseColor("#FF0000"));
-                }
-                else if (sens1 <= 100 && sens2 <= 100 && sens3 > 100){
-                    sensor1.setTextColor(Color.parseColor("#FF0000"));
-                    sensor2.setTextColor(Color.parseColor("#FF0000"));
-                }
-                else if (sens1 <= 100 && sens2 > 100 && sens3 <= 100){
-                    sensor1.setTextColor(Color.parseColor("#FF0000"));
-                    sensor3.setTextColor(Color.parseColor("#FF0000"));
-                }
-                else if (sens1 > 100 && sens2 <= 100 && sens3 <= 100){
-                    sensor2.setTextColor(Color.parseColor("#FF0000"));
-                    sensor3.setTextColor(Color.parseColor("#FF0000"));
-                }else if (sens1 <= 100 && sens2 <= 100 && sens3 <= 100){
-                    sensor1.setTextColor(Color.parseColor("#FF0000"));
-                    sensor2.setTextColor(Color.parseColor("#FF0000"));
-                    sensor3.setTextColor(Color.parseColor("#FF0000"));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        ValueEventListener listener1 = myref3.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//
+//
+//                int sens1 = snapshot.child("S1").getValue(int.class);
+//                sensor1.setText("Sensor1 "+sens1);
+//                int sens2 = snapshot.child("S2").getValue(int.class);
+//                sensor2.setText("Sensor2 "+sens2);
+//                int sens3 = snapshot.child("S3").getValue(int.class);
+//                sensor3.setText("Sensor3 "+sens3);
+//
+//                if (sens1 <= 100 ){
+//                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+//                }else if ( sens2 <= 100 ){
+//                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//                else if (sens3 <= 100){
+//                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//                if (sens1 <= 100 && sens2 > 100 && sens3 > 100){
+//                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+//                }else if (sens1 > 100 && sens2 <= 100 && sens3 > 100){
+//                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//                else if (sens1 > 100 && sens2 > 100 && sens3 <= 100){
+//                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//                else if (sens1 <= 100 && sens2 <= 100 && sens3 > 100){
+//                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+//                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//                else if (sens1 <= 100 && sens2 > 100 && sens3 <= 100){
+//                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+//                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//                else if (sens1 > 100 && sens2 <= 100 && sens3 <= 100){
+//                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+//                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+//                }else if (sens1 <= 100 && sens2 <= 100 && sens3 <= 100){
+//                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+//                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+//                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         name.setText("Welcome to dashboard "+getIntent().getStringExtra("name"));
         location_view = (Button) findViewById(R.id.location_view);
         ViewInfo = (Button) findViewById(R.id.viewinfo);

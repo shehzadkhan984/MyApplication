@@ -76,13 +76,10 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        sensor1 = (TextView) findViewById(R.id.sensor1);
-        sensor2 = (TextView) findViewById(R.id.sensor2);
-        sensor3 = (TextView) findViewById(R.id.sensor3);
+
         tempra = (TextView) findViewById(R.id.temp);
         humidity = (TextView) findViewById(R.id.humidity);
-        sensorss = (TextView) findViewById(R.id.stair);
-        ditchess = (TextView) findViewById(R.id.ditch);
+
 
         buttonStop = (Button) findViewById(R.id.dstop);
         serviceIntent = new Intent(getApplicationContext(),Myservice.class);
@@ -99,72 +96,72 @@ public class Dashboard extends AppCompatActivity {
                 stopService(new Intent(getApplicationContext(),Myservice.class));
             }
         });
-        ValueEventListener listener2 = myref2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int sens1 = snapshot.child("S1").getValue(int.class);
-                sensor1.setText("Sensor1 "+sens1);
-                int sens2 = snapshot.child("S2").getValue(int.class);
-                sensor2.setText("Sensor2 "+sens2);
-                int sens3 = snapshot.child("S3").getValue(int.class);
-                sensor3.setText("Sensor3 "+sens3);
-                if (sens1 <= 100 ){
-                    sensor1.setTextColor(Color.parseColor("#FF0000"));
-                }else if ( sens2 <= 100 ){
-                    sensor2.setTextColor(Color.parseColor("#FF0000"));
-                }
-                else if (sens3 <= 100){
-                    sensor3.setTextColor(Color.parseColor("#FF0000"));
-                }
-                if (sens1 <= 100 && sens2 > 100 && sens3 > 100){
-                    sensor1.setTextColor(Color.parseColor("#FF0000"));
-                }else if (sens1 > 100 && sens2 <= 100 && sens3 > 100){
-                    sensor2.setTextColor(Color.parseColor("#FF0000"));
-                }
-                else if (sens1 > 100 && sens2 > 100 && sens3 <= 100){
-                    sensor3.setTextColor(Color.parseColor("#FF0000"));
-                }
-                else if (sens1 <= 100 && sens2 <= 100 && sens3 > 100){
-                    sensor1.setTextColor(Color.parseColor("#FF0000"));
-                    sensor2.setTextColor(Color.parseColor("#FF0000"));
-                }
-                else if (sens1 <= 100 && sens2 > 100 && sens3 <= 100){
-                    sensor1.setTextColor(Color.parseColor("#FF0000"));
-                    sensor3.setTextColor(Color.parseColor("#FF0000"));
-                }
-                else if (sens1 > 100 && sens2 <= 100 && sens3 <= 100){
-                    sensor2.setTextColor(Color.parseColor("#FF0000"));
-                    sensor3.setTextColor(Color.parseColor("#FF0000"));
-                }else if (sens1 <= 100 && sens2 <= 100 && sens3 <= 100){
-                    sensor1.setTextColor(Color.parseColor("#FF0000"));
-                    sensor2.setTextColor(Color.parseColor("#FF0000"));
-                    sensor3.setTextColor(Color.parseColor("#FF0000"));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        ValueEventListener listner3 = myref6.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int sens4 = snapshot.child("ditch_stair").getValue(int.class);
-                if (sens4 > 50){
-                    ditchess.setText("Stair "+sens4);
-
-                }else if (sens4 < 40){
-                    sensorss.setText("Ditch "+sens4);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        ValueEventListener listener2 = myref2.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                int sens1 = snapshot.child("S1").getValue(int.class);
+//                sensor1.setText("Sensor1 "+sens1);
+//                int sens2 = snapshot.child("S2").getValue(int.class);
+//                sensor2.setText("Sensor2 "+sens2);
+//                int sens3 = snapshot.child("S3").getValue(int.class);
+//                sensor3.setText("Sensor3 "+sens3);
+//                if (sens1 <= 100 ){
+//                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+//                }else if ( sens2 <= 100 ){
+//                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//                else if (sens3 <= 100){
+//                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//                if (sens1 <= 100 && sens2 > 100 && sens3 > 100){
+//                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+//                }else if (sens1 > 100 && sens2 <= 100 && sens3 > 100){
+//                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//                else if (sens1 > 100 && sens2 > 100 && sens3 <= 100){
+//                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//                else if (sens1 <= 100 && sens2 <= 100 && sens3 > 100){
+//                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+//                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//                else if (sens1 <= 100 && sens2 > 100 && sens3 <= 100){
+//                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+//                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//                else if (sens1 > 100 && sens2 <= 100 && sens3 <= 100){
+//                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+//                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+//                }else if (sens1 <= 100 && sens2 <= 100 && sens3 <= 100){
+//                    sensor1.setTextColor(Color.parseColor("#FF0000"));
+//                    sensor2.setTextColor(Color.parseColor("#FF0000"));
+//                    sensor3.setTextColor(Color.parseColor("#FF0000"));
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//        ValueEventListener listner3 = myref6.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                int sens4 = snapshot.child("ditch_stair").getValue(int.class);
+//                if (sens4 > 50){
+//                    ditchess.setText("Ditch "+sens4);
+//
+//                }else if (sens4 < 40){
+//                    sensorss.setText("Stair  "+sens4);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         instance = this;
         Dexter.withActivity(this).withPermission(Manifest.permission.ACCESS_FINE_LOCATION).withListener(new PermissionListener() {
             @Override
@@ -255,7 +252,7 @@ public class Dashboard extends AppCompatActivity {
                                         String phoneno = user.phoneno;
                                         String name = user.fname;
                                         if (notifi==1){
-                                            String part1="hello "+name+" here its an emergency. to trace my location kindly click the link below\n";
+                                            String part1="hello "+name+", its an emergency. to trace my location kindly click the link below\n";
                                             String part2 ="https://www.google.com/maps/search/?api=1&query="+lati+","+longi;
                                             String merged = part1+part2;
                                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){

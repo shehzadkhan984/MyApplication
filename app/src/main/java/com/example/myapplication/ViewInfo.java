@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -42,6 +44,7 @@ import com.google.firebase.database.DatabaseReference;
 public class ViewInfo extends AppCompatActivity {
     TextView name, Age,Email,member,gender,phone,calls;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private static final int REQUEST_CALL = 1;
     DatabaseReference myref4= database.getReference("User Data");
 
     @Override
@@ -70,6 +73,7 @@ public class ViewInfo extends AppCompatActivity {
                         member.setText("Family Member : "+user.fmember);
                         gender.setText("Gender : "+user.gender);
                         phone.setText("Phone No. : "+user.phoneno);
+                        String phoneno1 = user.phoneno;
 
 
                     }
@@ -85,26 +89,36 @@ public class ViewInfo extends AppCompatActivity {
         calls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ValueEventListener listener3 = myref4.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot snapshot1 : snapshot.getChildren()){
-                            UserData user = snapshot1.getValue(UserData.class);
-                            String fmember1 = user.fmember;
-                            if (fmember1.equals("Visuall imapaired")){
-                                String phoneno = user.phoneno;
-                                Intent callintent = new Intent(Intent.ACTION_CALL);
-                                callintent.setData(Uri.parse("tel:"+phoneno));
-                                startActivity(callintent);
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                makePhoneCall();
             }
         });
+    }
+    private void makePhoneCall(){
+        ValueEventListener listener3 = myref4.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot snapshot1 : snapshot.getChildren()){
+                    UserData user = snapshot1.getValue(UserData.class);
+                    String fmember1 = user.fmember;
+                    if (fmember1.equals("Visuall imapaired")){
+                        if (ContextCompat.checkSelfPermission(ViewInfo.this,Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+                            ActivityCompat.requestPermissions(ViewInfo.this,new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+
+                        }else{
+                            String phoneno = "tel:"+user.phoneno;
+                            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(phoneno)));
+
+                        }
+
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 }

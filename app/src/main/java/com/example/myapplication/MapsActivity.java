@@ -74,10 +74,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onDataChange(DataSnapshot snapshot) {
                 Double latitude = snapshot.child("lat").getValue(Double.class);
                 Double longitude = snapshot.child("long").getValue(Double.class);
-                if(latitude!= null && longitude != null){
+                if(latitude != null && longitude != null){
                     // Add a marker in Sydney and move the camera
                     LatLng sydney = new LatLng(latitude, longitude);
-                    mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+                    mMap.addMarker(new MarkerOptions().position(sydney).title(""));
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,14F));
 
                 }else{

@@ -238,30 +238,14 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sensor1"
-                        android:id="@+id/sensor1"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:gravity="center_horizontal" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sensor2"
-                        android:id="@+id/sensor2"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:gravity="center_horizontal" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sensor3"
-                        android:id="@+id/sensor3"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:gravity="center_horizontal" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/gifImageView1"
+                        android:layout_height="100dp"
+                        android:layout_width="100dp"
+                        android:src="@drawable/eng"
+                        />
+
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -294,22 +278,12 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ditch"
-                        android:textStyle="bold"
-                        android:id="@+id/ditch"
-                        android:textAlignment="center"
-                        android:gravity="center_horizontal" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Stairs"
-                        android:id="@+id/stair"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:gravity="center_horizontal" />
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/gifImageView"
+                        android:layout_height="100dp"
+                        android:layout_width="100dp"
+                        android:src="@drawable/eng"
+                        />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -381,35 +355,6 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_gravity="center_vertical|center_horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Location from\n GPS"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:gravity="center_horizontal" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-            <!--            sensors data 1-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_column="1"
-                android:layout_gravity="fill"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_gravity="center_vertical|center_horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -435,6 +380,64 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Location from\n GPS"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:gravity="center_horizontal" />-->
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <!--            sensors data 1-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:layout_gravity="fill"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1.5"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical|center_horizontal">
+                    <Button
+                        android:id="@+id/viewinfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@color/colorPrimary"
+                        android:text="View info"
+
+
+                        android:textColor="#ffff"
+                        android:textColorHighlight="@color/colorPrimary"
+                        android:textColorLink="@color/colorPrimary"
+                        android:textCursorDrawable="@color/colorPrimary"
+                        android:textSize="16dp" />
+                    <Button
+                        android:id="@+id/location_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@color/colorPrimary"
+                        android:text="Location"
+
+                        android:textColor="#ffff"
+                        android:textColorHighlight="@color/colorPrimary"
+                        android:textColorLink="@color/colorPrimary"
+                        android:textCursorDrawable="@color/colorPrimary"
+                        android:textSize="16dp" />
+
+
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -467,33 +470,7 @@
 <!--                        android:textStyle="bold"-->
 <!--                        android:textAlignment="center"-->
 <!--                        android:gravity="center_horizontal" />-->
-                    <Button
-                        android:id="@+id/viewinfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@color/colorPrimary"
-                        android:text="View info"
 
-
-                        android:textColor="#ffff"
-                        android:textColorHighlight="@color/colorPrimary"
-                        android:textColorLink="@color/colorPrimary"
-                        android:textCursorDrawable="@color/colorPrimary"
-                        android:textSize="16dp" />
-                    <Button
-                        android:id="@+id/location_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@color/colorPrimary"
-                        android:text="Location"
-
-                        android:textColor="#ffff"
-                        android:textColorHighlight="@color/colorPrimary"
-                        android:textColorLink="@color/colorPrimary"
-                        android:textCursorDrawable="@color/colorPrimary"
-                        android:textSize="16dp" />
                     <Button
                         android:id="@+id/flogout"
                         android:layout_width="wrap_content"
@@ -510,16 +487,10 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-            <!--            ab aya msg ka-->
+<!--                        ab aya msg ka-->
 
 
         </GridLayout>
-
-
-
-
-
-
 
     </RelativeLayout>
 

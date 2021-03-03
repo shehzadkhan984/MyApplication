@@ -136,6 +136,7 @@
                     android:gravity="center"
                     android:layout_gravity="center_vertical|center_horizontal">
 
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -144,30 +145,36 @@
                         android:textSize="16dp"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sensor1"
-                        android:id="@+id/sensor1"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:gravity="center_horizontal" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sensor2"
-                        android:id="@+id/sensor2"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:gravity="center_horizontal" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sensor3"
-                        android:id="@+id/sensor3"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:gravity="center_horizontal" />
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/gifImageView"
+                        android:layout_height="100dp"
+                        android:layout_width="100dp"
+                        android:src="@drawable/eng"
+                        />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Sensor1"-->
+<!--                        android:id="@+id/sensor1"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:gravity="center_horizontal" />-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Sensor2"-->
+<!--                        android:id="@+id/sensor2"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:gravity="center_horizontal" />-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Sensor3"-->
+<!--                        android:id="@+id/sensor3"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:gravity="center_horizontal" />-->
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -200,22 +207,28 @@
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:gravity="center_horizontal" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ditch"
-                        android:id="@+id/ditch"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:gravity="center_horizontal" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="stairs"
-                        android:id="@+id/stair"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
-                        android:gravity="center_horizontal" />
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/gifImageView1"
+                        android:layout_height="100dp"
+                        android:layout_width="100dp"
+                        android:src="@drawable/eng"
+                        />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="ditch"-->
+<!--                        android:id="@+id/ditch"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:gravity="center_horizontal" />-->
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="stairs"-->
+<!--                        android:id="@+id/stair"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:gravity="center_horizontal" />-->
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
