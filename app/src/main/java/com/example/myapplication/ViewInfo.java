@@ -43,6 +43,7 @@ import com.google.firebase.database.DatabaseReference;
 
 public class ViewInfo extends AppCompatActivity {
     TextView name, Age,Email,member,gender,phone,calls;
+    Button bac;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private static final int REQUEST_CALL = 1;
     DatabaseReference myref4= database.getReference("User Data");
@@ -58,6 +59,17 @@ public class ViewInfo extends AppCompatActivity {
         gender = (TextView) findViewById(R.id.gen);
         phone = (TextView) findViewById(R.id.mobile_no);
         calls =  (Button) findViewById(R.id.call);
+        bac = (Button) findViewById(R.id.back);
+        bac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),Family.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+
+                startActivity(i);
+            }
+        });
 
         ValueEventListener listener2 = myref4.addValueEventListener(new ValueEventListener() {
             @Override
@@ -119,6 +131,14 @@ public class ViewInfo extends AppCompatActivity {
             }
         });
 
+
+    }
+    @Override
+    public void onBackPressed() {
+        Intent setIntent = new Intent(ViewInfo.this,MainActivity.class);
+        setIntent.addCategory(Intent.CATEGORY_HOME);
+        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(setIntent);
 
     }
 }

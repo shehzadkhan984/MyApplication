@@ -67,6 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Location");
         ValueEventListener listener = databaseReference.addValueEventListener(new ValueEventListener() {
@@ -78,7 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     // Add a marker in Sydney and move the camera
                     LatLng sydney = new LatLng(latitude, longitude);
                     mMap.addMarker(new MarkerOptions().position(sydney).title(""));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,14F));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,16F));
 
                 }else{
                     startActivity(new Intent(MapsActivity.this,Family.class));
@@ -93,8 +94,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
+
 //        LatLng sydney = new LatLng(24.8686914, 66.992049);
 //        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,14F));
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent setIntent = new Intent(MapsActivity.this,MainActivity.class);
+        setIntent.addCategory(Intent.CATEGORY_HOME);
+        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(setIntent);
+
     }
 }

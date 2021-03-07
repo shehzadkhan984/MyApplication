@@ -332,12 +332,13 @@
                     <Button
                         android:id="@+id/dstop"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="40dp"
                         android:layout_marginBottom="5dp"
                         android:background="@color/colorPrimary"
-                        android:text="STOP"
+                        android:text="STOP SERVICE"
 
                         android:textColor="#ffff"
+                        android:padding="4dp"
                         android:textColorHighlight="@color/colorPrimary"
                         android:textColorLink="@color/colorPrimary"
                         android:textCursorDrawable="@color/colorPrimary"
@@ -432,7 +433,7 @@
                         android:textColorHighlight="@color/colorPrimary"
                         android:textColorLink="@color/colorPrimary"
                         android:textCursorDrawable="@color/colorPrimary"
-                        android:textSize="16dp" />
+                        android:textSize="18dp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

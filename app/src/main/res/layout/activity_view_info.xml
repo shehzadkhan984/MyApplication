@@ -220,6 +220,19 @@
                             android:textColorLink="@color/colorPrimary"
                             android:textCursorDrawable="@color/colorPrimary"
                             android:textSize="18dp" />
+                        <Button
+                            android:id="@+id/back"
+                            android:layout_width="200dp"
+                            android:layout_height="40dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/colorPrimary"
+                            android:text="Back"
+                            android:textColor="#ffff"
+                            android:textColorHighlight="@color/colorPrimary"
+                            android:textColorLink="@color/colorPrimary"
+                            android:textCursorDrawable="@color/colorPrimary"
+                            android:textSize="18dp" />
                         <!--                    <TextView-->
                         <!--                        android:layout_width="wrap_content"-->
                         <!--                        android:layout_height="match_parent"-->
