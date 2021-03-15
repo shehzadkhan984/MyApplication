@@ -73,13 +73,13 @@ public class Myservice extends Service {
         sound4 = soundPool.load(this,R.raw.stairs,1);
         sound5 = soundPool.load(this,R.raw.ditch,1);
 
-        sound6 = soundPool.load(this,R.raw.everything,1);
-        sound7 = soundPool.load(this,R.raw.everything,1);
+        sound6 = soundPool.load(this,R.raw.front_left,1);
+        sound7 = soundPool.load(this,R.raw.left_right,1);
         sound8 = soundPool.load(this,R.raw.everything,1);
         sound9 = soundPool.load(this,R.raw.everything,1);
-        sound10 = soundPool.load(this,R.raw.everything,1);
-        sound11 = soundPool.load(this,R.raw.obstacle_stair,1);
-        sound12 = soundPool.load(this,R.raw.obstacle_ditch,1);
+        sound10 = soundPool.load(this,R.raw.front_right,1);
+        sound11 = soundPool.load(this,R.raw.front_stair,1);
+        sound12 = soundPool.load(this,R.raw.front_ditch,1);
 
         sound13 = soundPool.load(this,R.raw.everything,1);
         sound14 = soundPool.load(this,R.raw.everything,1);
